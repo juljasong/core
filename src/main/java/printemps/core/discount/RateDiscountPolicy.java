@@ -3,15 +3,14 @@ package printemps.core.discount;
 import printemps.core.member.Grade;
 import printemps.core.member.Member;
 
-public class FixDiscountPolicy implements DiscountPolicy {
-
-  private int discountFixAmount = 1000; // 1000원 할인
+public class RateDiscountPolicy implements DiscountPolicy{
+  
+  private int discountPercent = 10;
 
   @Override
   public int discout(Member member, int price) {
-
-    if (member.getGrade() == Grade.VIP) { // Enum 타입은 ==
-      return discountFixAmount;
+    if (member.getGrade() == Grade.VIP) {
+      return price * discountPercent / 100;
     } else {
       return 0;
     }

@@ -1,15 +1,21 @@
 package printemps.core.order;
 
-import printemps.core.discount.DiscoutPolicy;
-import printemps.core.discount.FixDiscountPolicy;
+import printemps.core.discount.DiscountPolicy;
 import printemps.core.member.Member;
 import printemps.core.member.MemberRepository;
-import printemps.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
   
-  private final MemberRepository memberRepository = new MemoryMemberRepository();
-  private final DiscoutPolicy discoutPolicy = new FixDiscountPolicy();
+  private MemberRepository memberRepository;
+  private DiscountPolicy discoutPolicy; // 인터페이스에 의존 -> NPE
+  //private final DiscoutPolicy discoutPolicy = new FixDiscountPolicy();
+  //private final DiscoutPolicy discoutPolicy = new RateDiscountPolicy();
+  
+  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discoutPolicy) {
+    //super();
+    this.memberRepository = memberRepository;
+    this.discoutPolicy = discoutPolicy;
+  }
 
   @Override
   public Order createOrder(Long memberId, String itemName, int itemPrice) {
