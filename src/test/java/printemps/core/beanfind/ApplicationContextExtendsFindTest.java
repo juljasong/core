@@ -17,21 +17,21 @@ public class ApplicationContextExtendsFindTest {
   AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
   
   @Test
-  @DisplayName("ºÎ¸ğ Å¸ÀÔÀ¸·Î Á¶È¸ ½Ã, ÀÚ½ÄÀÌ µÑ ÀÌ»ó ÀÖÀ¸¸é, Áßº¹ ¿À·ù ¹ß»ı")
+  @DisplayName("ë¶€ëª¨ íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ ì‹œ, ìì‹ì´ ë‘˜ ì´ìƒ ìˆìœ¼ë©´, ì¤‘ë³µ ì˜¤ë¥˜ ë°œìƒ")
   void findBeanByParentTypeDuplicate() {
     //DiscountPolicy discountPolicy = ac.getBean(DiscountPolicy.class);
     Assertions.assertThrows(NoUniqueBeanDefinitionException.class, () -> ac.getBean(DiscountPolicy.class));
   }
   
   @Test
-  @DisplayName("ºÎ¸ğ Å¸ÀÔÀ¸·Î Á¶È¸ ½Ã, ÀÚ½ÄÀÌ µÑ ÀÌ»ó ÀÖÀ¸¸é, ºó ÀÌ¸§ ÁöÁ¤ÇÏ¸é µÊ")
+  @DisplayName("ë¶€ëª¨ íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ ì‹œ, ìì‹ì´ ë‘˜ ì´ìƒ ìˆìœ¼ë©´, ë¹ˆ ì´ë¦„ ì§€ì •í•˜ë©´ ë¨")
   void findBeanByParentTypeBeanName() {
     DiscountPolicy ratediscountPolicy = ac.getBean("rateDiscountPolicy", DiscountPolicy.class);
     org.assertj.core.api.Assertions.assertThat(ratediscountPolicy).isInstanceOf(RateDiscountPolicy.class);
   }
   
   @Test
-  @DisplayName("Æ¯Á¤ ÇÏÀ§ Å¸ÀÔÀ¸·Î Á¶È¸")
+  @DisplayName("íŠ¹ì • í•˜ìœ„ íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ")
   void findBeanBySunType() {
     RateDiscountPolicy rateDiscountPolicy = ac.getBean(RateDiscountPolicy.class);
     org.assertj.core.api.Assertions.assertThat(rateDiscountPolicy).isInstanceOf(RateDiscountPolicy.class);
@@ -39,7 +39,7 @@ public class ApplicationContextExtendsFindTest {
   
   
   @Test
-  @DisplayName("ºÎ¸ğ Å¸ÀÔÀ¸·Î ¸ğµÎ Á¶È¸ÇÏ±â")
+  @DisplayName("ë¶€ëª¨ íƒ€ì…ìœ¼ë¡œ ëª¨ë‘ ì¡°íšŒí•˜ê¸°")
   void findAllBeanByParentType() {
     Map<String, DiscountPolicy> beansofType = ac.getBeansOfType(DiscountPolicy.class);
     org.assertj.core.api.Assertions.assertThat(beansofType.size()).isEqualTo(2);
@@ -50,7 +50,7 @@ public class ApplicationContextExtendsFindTest {
   }
   
   @Test
-  @DisplayName("ºÎ¸ğ Å¸ÀÔÀ¸·Î ¸ğµÎ Á¶È¸ - Object")
+  @DisplayName("ë¶€ëª¨ íƒ€ì…ìœ¼ë¡œ ëª¨ë‘ ì¡°íšŒ - Object")
   void findAllBeanByObjectType() {
     Map<String, Object> beansofType = ac.getBeansOfType(Object.class);
     for (String key : beansofType.keySet()) {

@@ -5,7 +5,7 @@ import printemps.core.member.Member;
 public interface DiscountPolicy {
   
   /*
-   * @return ÇÒÀÎ ´ë»ó ±İ¾×
+   * @return í• ì¸ ëŒ€ìƒ ê¸ˆì•¡
    */
   int discout(Member member, int price);
   

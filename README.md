@@ -7,17 +7,17 @@ using https://start.spring.io/
 
 ```java
 @Test
-Assertions.assertThat(ºñ±³°ª).isEqualTo(¿¹»ó°ª);
+Assertions.assertThat(ë¹„êµê°’).isEqualTo(ì˜ˆìƒê°’);
 ```
 
 # 20210909_ Add AppConfig for DIP(Dependency Inversion Principle)
 AppConfig ?
-- ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ ½ÇÁ¦ µ¿ÀÛ¿¡ ÇÊ¿äÇÑ ±¸Çö °´Ã¼ »ı¼º
-- »ı¼ºÇÑ °´Ã¼ ÀÎ½ºÅÏ½ºÀÇ ÂüÁ¶(·¹ÆÛ·±½º)¸¦ »ı¼ºÀÚ¸¦ ÅëÇØ ÁÖÀÔ(¿¬°á) => DI(Dependency Injection)
+- ì• í”Œë¦¬ì¼€ì´ì…˜ì˜ ì‹¤ì œ ë™ì‘ì— í•„ìš”í•œ êµ¬í˜„ ê°ì²´ ìƒì„±
+- ìƒì„±í•œ ê°ì²´ ì¸ìŠ¤í„´ìŠ¤ì˜ ì°¸ì¡°(ë ˆí¼ëŸ°ìŠ¤)ë¥¼ ìƒì„±ìë¥¼ í†µí•´ ì£¼ì…(ì—°ê²°) => DI(Dependency Injection)
 
 ```java
 @Test
-@BeforeEach // Å×½ºÆ® ½ÇÇà Àü ¹«Á¶°Ç ½ÇÇàÇÒ ÄÚµå
+@BeforeEach // í…ŒìŠ¤íŠ¸ ì‹¤í–‰ ì „ ë¬´ì¡°ê±´ ì‹¤í–‰í•  ì½”ë“œ
   public void beforeEach() { ... } 
 ```
 
@@ -26,12 +26,12 @@ AppConfig ?
 - Framework vs Library
 - DI
 
-BeanDefinition.ROLE_APPLICATION : Á÷Á¢ µî·ÏÇÑ ¾îÇÃ¸®ÄÉÀÌ¼Ç ºó
-BeanDefinition.ROLE_INFRASTRUCTURE : ½ºÇÁ¸µÀÌ ³»ºÎ¿¡¼­ »ç¿ëÇÏ´Â ºó
+BeanDefinition.ROLE_APPLICATION : ì§ì ‘ ë“±ë¡í•œ ì–´í”Œë¦¬ì¼€ì´ì…˜ ë¹ˆ
+BeanDefinition.ROLE_INFRASTRUCTURE : ìŠ¤í”„ë§ì´ ë‚´ë¶€ì—ì„œ ì‚¬ìš©í•˜ëŠ” ë¹ˆ
 
 ###[MOD] AppConfig.java, ~App.java
 
-- AppConfig.java : Bean  µî·Ï
+- AppConfig.java : Bean  ë“±ë¡
 
 ```java
 @Configuration 
@@ -42,7 +42,7 @@ public class AppConfig {
   }
 }
 ```
-- ~App.java : ºó Á¶È¸
+- ~App.java : ë¹ˆ ì¡°íšŒ
 
 ac.getBean("Bean_name", TYPE)
 ac.getBean(TYPE)
@@ -59,19 +59,19 @@ ac.getBean(TYPE)
 
 BeanFactory
 
-- ½ºÇÁ¸µ ÄÁÅ×ÀÌ³Ê ÃÖ»óÀ§ ÀÎÅÍÆäÀÌ½º
-- ½ºÇÁ¸µ ºó °ü¸® ¹× Á¶È¸
-- .getBean() Á¦°ø
+- ìŠ¤í”„ë§ ì»¨í…Œì´ë„ˆ ìµœìƒìœ„ ì¸í„°í˜ì´ìŠ¤
+- ìŠ¤í”„ë§ ë¹ˆ ê´€ë¦¬ ë° ì¡°íšŒ
+- .getBean() ì œê³µ
 
 ApplicationContext
 
-- BeanFactory ±â´É ¸ğµÎ »ó¼Ó¹Ş¾Æ Á¦°ø
-- ¾îÇÃ¸®ÄÉÀÌ¼Ç °³¹ß ½Ã ÇÊ¿äÇÑ ºÎ°¡±â´É Á¦°ø
+- BeanFactory ê¸°ëŠ¥ ëª¨ë‘ ìƒì†ë°›ì•„ ì œê³µ
+- ì–´í”Œë¦¬ì¼€ì´ì…˜ ê°œë°œ ì‹œ í•„ìš”í•œ ë¶€ê°€ê¸°ëŠ¥ ì œê³µ
 
-###XML ¼³Á¤
-: ÃÖ±Ù¿¡´Â Àß »ç¿ëÇÏÁö ¾ÊÀ½. ÄÄÆÄÀÏ ¾øÀÌ ºó ¼³Á¤ Á¤º¸ º¯°æÇÒ ¼ö ÀÖ¾î ÀÌ»óÀûÀÌ±âµµ......
+###XML ì„¤ì •
+: ìµœê·¼ì—ëŠ” ì˜ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ. ì»´íŒŒì¼ ì—†ì´ ë¹ˆ ì„¤ì • ì •ë³´ ë³€ê²½í•  ìˆ˜ ìˆì–´ ì´ìƒì ì´ê¸°ë„......
 
-###BeanDefinition Á¤º¸
+###BeanDefinition ì •ë³´
 
 BeanClassName
 factoryBeanName

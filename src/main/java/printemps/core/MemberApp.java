@@ -15,9 +15,9 @@ public class MemberApp {
     //MemberService memberService = new MemberService();
     //MemberService memberService = appConfig.memberService();
     
-    // AppConfigÀÇ @Bean ÁÖÀÔ ¹× °ü¸®
+    // AppConfigì˜ @Bean ì£¼ì… ë° ê´€ë¦¬
     ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-    MemberService memberService = ac.getBean("memberService", MemberService.class); // ("ÀÌ¸§", Å¸ÀÔ);
+    MemberService memberService = ac.getBean("memberService", MemberService.class); // ("ï¿½Ì¸ï¿½", Å¸ï¿½ï¿½);
     
     Member member = new Member(1L, "memberA", Grade.VIP);
     

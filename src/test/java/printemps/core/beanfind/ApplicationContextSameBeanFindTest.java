@@ -17,7 +17,7 @@ public class ApplicationContextSameBeanFindTest {
       new AnnotationConfigApplicationContext(SameBeanConfig.class);
 
   @Test
-  @DisplayName("Å¸ÀÔÀ¸·Î Á¶È¸ ½Ã °°Àº Å¸ÀÔÀÌ µÑ ÀÌ»ó ÀÖÀ¸¸é, Áßº¹ ¿À·ù ¹ß»ı") // NoUniqueBeanDefinitionException
+  @DisplayName("íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ ì‹œ ê°™ì€ íƒ€ì…ì´ ë‘˜ ì´ìƒ ìˆìœ¼ë©´, ì¤‘ë³µ ì˜¤ë¥˜ ë°œìƒ") // NoUniqueBeanDefinitionException
   void findBeanByTypeDuplicate() {
     // MemberRepository memberRepository = ac.getBean(MemberRepository.class);
     Assertions.assertThrows(NoUniqueBeanDefinitionException.class,
@@ -25,7 +25,7 @@ public class ApplicationContextSameBeanFindTest {
   }
 
   @Test
-  @DisplayName("Å¸ÀÔÀ¸·Î Á¶È¸ ½Ã °°Àº Å¸ÀÔÀÌ µÑ ÀÌ»ó ÀÖÀ¸¸é, ºó ÀÌ¸§ ÁöÁ¤ÇÏ¸é µÊ")
+  @DisplayName("íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ ì‹œ ê°™ì€ íƒ€ì…ì´ ë‘˜ ì´ìƒ ìˆìœ¼ë©´, ë¹ˆ ì´ë¦„ ì§€ì •í•˜ë©´ ë¨")
   void findBeanByName() {
     org.assertj.core.api.Assertions
         .assertThat(ac.getBean("memberRepository1", MemberRepository.class))
@@ -33,7 +33,7 @@ public class ApplicationContextSameBeanFindTest {
   }
   
   @Test
-  @DisplayName("Æ¯Á¤ Å¸ÀÔ ¸ğµÎ Á¶È¸")
+  @DisplayName("íŠ¹ì • íƒ€ì… ëª¨ë‘ ì¡°íšŒ")
   void findAllBeanByType() {
     Map<String, MemberRepository> beansOfType = ac.getBeansOfType(MemberRepository.class);
     for(String key : beansOfType.keySet()) {
@@ -45,7 +45,7 @@ public class ApplicationContextSameBeanFindTest {
   
   
   @Configuration
-  static class SameBeanConfig { // static ->Å¬·¡½º ³»¿¡¼­¸¸ ¾²°Ú´Ù
+  static class SameBeanConfig { // static ->í´ë˜ìŠ¤ ë‚´ì—ì„œë§Œ ì“°ê² ë‹¤
 
     @Bean
     public MemberRepository memberRepository1() {

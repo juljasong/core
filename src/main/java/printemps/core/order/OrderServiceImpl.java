@@ -7,7 +7,7 @@ import printemps.core.member.MemberRepository;
 public class OrderServiceImpl implements OrderService{
   
   private MemberRepository memberRepository;
-  private DiscountPolicy discoutPolicy; // ÀÎÅÍÆäÀÌ½º¿¡ ÀÇÁ¸ -> NPE
+  private DiscountPolicy discoutPolicy; // ì¸í„°íŽ˜ì´ìŠ¤ì— ì˜ì¡´ -> NPE
   //private final DiscoutPolicy discoutPolicy = new FixDiscountPolicy();
   //private final DiscoutPolicy discoutPolicy = new RateDiscountPolicy();
   

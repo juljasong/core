@@ -14,32 +14,32 @@ public class ApplicationContextBasicFindTest {
   AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
   @Test
-  @DisplayName("ºó ÀÌ¸§À¸·Î Á¶È¸")
+  @DisplayName("ë¹ˆ ì´ë¦„ìœ¼ë¡œ ì¡°íšŒ")
   void findBeanByName() {
     MemberService memberService = ac.getBean("memberService", MemberService.class);
     Assertions.assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
   }
 
   @Test
-  @DisplayName("ÀÌ¸§ ¾øÀÌ Å¸ÀÔÀ¸·Î Á¶È¸")
+  @DisplayName("ì´ë¦„ ì—†ì´ íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ")
   void findBeanByType() {
     MemberService memberService = ac.getBean(MemberService.class);
     Assertions.assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
   }
 
   @Test
-  @DisplayName("±¸Ã¼ Å¸ÀÔÀ¸·Î Á¶È¸")
+  @DisplayName("êµ¬ì²´ íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ")
   void findBeanByName2() {
     MemberService memberService = ac.getBean(MemberServiceImpl.class);
     Assertions.assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
   }
 
   @Test
-  @DisplayName("ºó ÀÌ¸§À¸·Î Á¶È¸X")
+  @DisplayName("ë¹ˆ ì´ë¦„ìœ¼ë¡œ ì¡°íšŒX")
   void findBeanByNameX() {
     // MemberService memberService = ac.getBean("xxx", MemberService.class);
     org.junit.jupiter.api.Assertions.assertThrows(NoSuchBeanDefinitionException.class,
-        () -> ac.getBean("xxx", MemberService.class)); // ÇØ´ç ¿¡·¯°¡ ¹ß»ıÇØ¾ß¸¸ OK
+        () -> ac.getBean("xxx", MemberService.class)); // í•´ë‹¹ ì—ëŸ¬ê°€ ë°œìƒí•´ì•¼ë§Œ OK
   }
 
 }

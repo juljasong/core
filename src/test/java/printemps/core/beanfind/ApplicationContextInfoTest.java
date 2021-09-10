@@ -11,7 +11,7 @@ public class ApplicationContextInfoTest {
   AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
   @Test
-  @DisplayName("¸ğµç ºó Ãâ·Â")
+  @DisplayName("ëª¨ë“  ë¹ˆ ì¶œë ¥")
   void findAllBean() {
     String[] beanDefinitionNames =  ac.getBeanDefinitionNames();
     for (String beanDefinitionName : beanDefinitionNames) {
@@ -21,14 +21,14 @@ public class ApplicationContextInfoTest {
   }
   
   @Test
-  @DisplayName("¾îÇÃ¸®ÄÉÀÌ¼Ç ºó Ãâ·Â")
+  @DisplayName("ì–´í”Œë¦¬ì¼€ì´ì…˜ ë¹ˆ ì¶œë ¥")
   void findApplicationBean() {
     String[] beanDefinitionNames =  ac.getBeanDefinitionNames();
     for (String beanDefinitionName : beanDefinitionNames) {
       BeanDefinition beanDefinition =  ac.getBeanDefinition(beanDefinitionName);
       
-      //if (beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION) { // Á÷Á¢ µî·ÏÇÑ ¾îÇÃ¸®ÄÉÀÌ¼Ç ºó
-      if (beanDefinition.getRole() == BeanDefinition.ROLE_INFRASTRUCTURE) { // ½ºÇÁ¸µÀÌ ³»ºÎ¿¡¼­ »ç¿ëÇÏ´Â ºó
+      //if (beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION) { // ì§ì ‘ ë“±ë¡í•œ ì–´í”Œë¦¬ì¼€ì´ì…˜ ë¹ˆ
+      if (beanDefinition.getRole() == BeanDefinition.ROLE_INFRASTRUCTURE) { // ìŠ¤í”„ë§ì´ ë‚´ë¶€ì—ì„œ ì‚¬ìš©í•˜ëŠ” ë¹ˆ
         Object bean = ac.getBean(beanDefinitionName);
         System.out.println("name = " + beanDefinitionName + "object : " + bean );
       }

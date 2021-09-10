@@ -11,12 +11,12 @@ public class BeanDefinitionTest {
   AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
   
   @Test
-  @DisplayName("ºó ¼³Á¤ ¸ŞÅ¸Á¤º¸ È®ÀÎ")
+  @DisplayName("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½")
   void findApplicationBean() {
     String[] beanDefinitionNames =  ac.getBeanDefinitionNames();
     
     for(String beanDefinitionName : beanDefinitionNames) {
-      BeanDefinition beanDefinition = ac.getBeanDefinition(beanDefinitionName); // AnnotationConfigApplicationContext¿¡¸¸ Á¤ÀÇµÇ¾î ÀÖÀ½
+      BeanDefinition beanDefinition = ac.getBeanDefinition(beanDefinitionName); // AnnotationConfigApplicationContextì—ë§Œ ì •ì˜ë˜ì–´ ìˆìŒ
       
       if(beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION) {
         System.out.println("beanDefinitionName = " + beanDefinitionName + "beanDefinition = " + beanDefinition);

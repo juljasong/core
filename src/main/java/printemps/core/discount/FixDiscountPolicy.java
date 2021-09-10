@@ -5,12 +5,12 @@ import printemps.core.member.Member;
 
 public class FixDiscountPolicy implements DiscountPolicy {
 
-  private int discountFixAmount = 1000; // 1000¿ø ÇÒÀÎ
+  private int discountFixAmount = 1000; // 1000ì› í• ì¸
 
   @Override
   public int discout(Member member, int price) {
 
-    if (member.getGrade() == Grade.VIP) { // Enum Å¸ÀÔÀº ==
+    if (member.getGrade() == Grade.VIP) { // Enum íƒ€ì…ì€ ==
       return discountFixAmount;
     } else {
       return 0;

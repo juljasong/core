@@ -12,7 +12,7 @@ import printemps.core.order.OrderService;
 import printemps.core.order.OrderServiceImpl;
 
 // DI(Dependency Injection)
-// ¼³Á¤Á¤º¸
+// ì„¤ì •ì •ë³´
 @Configuration 
 public class AppConfig {
   
