@@ -54,3 +54,30 @@ ac.getBean(TYPE)
     OrderService orderService = ac.getBean("orderService", OrderService.class);
   }
 ```
+
+###BeanFactory? ApplicationContext
+
+BeanFactory
+
+- 스프링 컨테이너 최상위 인터페이스
+- 스프링 빈 관리 및 조회
+- .getBean() 제공
+
+ApplicationContext
+
+- BeanFactory 기능 모두 상속받아 제공
+- 어플리케이션 개발 시 필요한 부가기능 제공
+
+###XML 설정
+: 최근에는 잘 사용하지 않음. 컴파일 없이 빈 설정 정보 변경할 수 있어 이상적이기도......
+
+###BeanDefinition 정보
+
+BeanClassName
+factoryBeanName
+factoryMethodName
+Scope
+lazyInit
+InitMethodName
+DestroyMethodName
+Constructor arguments, Properties

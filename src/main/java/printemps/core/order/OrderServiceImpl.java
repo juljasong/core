@@ -11,10 +11,10 @@ public class OrderServiceImpl implements OrderService{
   //private final DiscoutPolicy discoutPolicy = new FixDiscountPolicy();
   //private final DiscoutPolicy discoutPolicy = new RateDiscountPolicy();
   
-  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discoutPolicy) {
+  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
     //super();
     this.memberRepository = memberRepository;
-    this.discoutPolicy = discoutPolicy;
+    this.discoutPolicy = discountPolicy;
   }
 
   @Override
