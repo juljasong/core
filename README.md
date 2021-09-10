@@ -21,7 +21,7 @@ AppConfig ?
   public void beforeEach() { ... } 
 ```
 
-#20210910_ Spring
+# 20210910_ Spring
 - IoC(Inversion of Control)
 - Framework vs Library
 - DI
@@ -29,7 +29,7 @@ AppConfig ?
 BeanDefinition.ROLE_APPLICATION : 직접 등록한 어플리케이션 빈
 BeanDefinition.ROLE_INFRASTRUCTURE : 스프링이 내부에서 사용하는 빈
 
-###[MOD] AppConfig.java, ~App.java
+### [MOD] AppConfig.java, ~App.java
 
 - AppConfig.java : Bean  등록
 
@@ -55,7 +55,7 @@ ac.getBean(TYPE)
   }
 ```
 
-###BeanFactory? ApplicationContext
+### BeanFactory? ApplicationContext
 
 BeanFactory
 
@@ -68,10 +68,10 @@ ApplicationContext
 - BeanFactory 기능 모두 상속받아 제공
 - 어플리케이션 개발 시 필요한 부가기능 제공
 
-###XML 설정
+### XML 설정
 : 최근에는 잘 사용하지 않음. 컴파일 없이 빈 설정 정보 변경할 수 있어 이상적이기도......
 
-###BeanDefinition 정보
+### BeanDefinition 정보
 
 BeanClassName
 factoryBeanName
