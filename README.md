@@ -81,3 +81,27 @@ lazyInit
 InitMethodName
 DestroyMethodName
 Constructor arguments, Properties
+
+# 20210913_ [ADD] /test/SingletonService.java
+### Singleton
+- 생성자가 여러 차례 호출되더라도 실제로 생성되는 객체는 하나이고, 최초 생성 이후에 호출된 생성자는 최초의 생성자가 생성한 객체를 리턴
+
+````java
+public class SingletonService {
+
+    private static final SingletonService instance = new SingletonService();
+
+    // static으로 선언하여 객체를 1개만 생성
+    public static SingletonService getInstance() {
+        return instance;
+    }
+
+    // 생성자를 private으로 선언하여 외부에서 new 키워드 사용한 객체 생성 방지
+    private SingletonService() {}
+
+    private void logic() {
+        System.out.println("싱글톤 객체 로직 호출");
+    }
+    
+}
+````
