@@ -13,19 +13,24 @@ import printemps.core.order.OrderServiceImpl;
 
 // DI(Dependency Injection)
 // 설정정보
-@Configuration 
+@Configuration // Configuration이 없으면 싱글톤 적용 X
 public class AppConfig {
   
   @Bean
-  public MemberService memberService() { return new MemberServiceImpl(memberRepository()); }
+  public MemberService memberService() {
+    //System.out.println("** call AppConfig.memberService");
+    return new MemberServiceImpl(memberRepository());
+  }
 
   @Bean
   public MemberRepository memberRepository() {
+    //System.out.println("** call AppConfig.memberRepository");
     return new MemoryMemberRepository();
   }
   
   @Bean
   public OrderService orderService() {
+    //System.out.println("** call AppConfig.orderService");
     return new OrderServiceImpl(memberRepository(), discountPolicy());
   }
 
