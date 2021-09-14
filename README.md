@@ -119,3 +119,9 @@ public class SingletonService {
     - 가급적 읽기만 가능해야
     - 필드 대신 자바에서 공유되지 않는 지역변수, 파라미터, ThreadLocal 등을 사용해야 함
 
+# 20210914 Add AutoAppConfig.java
+### Auto ComponentScan
+- @Bean으로 직접 설정 정보를 작성하지 않기 때문에, 의존 관계 주입을 클래스 안에서 해결해야 함
+  - @ComponentScan
+  - @Component
+  - @Autowired : 자동 주입

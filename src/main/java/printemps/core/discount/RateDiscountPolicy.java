@@ -1,8 +1,10 @@
 package printemps.core.discount;
 
+import org.springframework.stereotype.Component;
 import printemps.core.member.Grade;
 import printemps.core.member.Member;
 
+@Component
 public class RateDiscountPolicy implements DiscountPolicy{
   
   private int discountPercent = 10;
