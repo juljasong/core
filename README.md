@@ -218,3 +218,21 @@ File - Settings - Compiler - Annotation Processors - [Check] Enable annotiation 
 - @Setter
 - @ToString
 - @RequiredArgsConstructor : final이 붙은 변수를 파라미터로 받는 생성자 자동 완성. 의존관계 추가할 때 편함
+
+### 조회하는 빈이 2개 이상일 때
+- @Autowired : Type으로 매칭 시도하여, 여러 빈이 존재하면, 필드 이름, 파라미터 이름으로 빈 이름 추가 매칭
+=> 문제 발생 시 해결방법
+  - @Autowired 필드명 매칭
+````java
+  private final MemberRepository memberRepository;
+  private final DiscountPolicy discountPolicy;
+
+  @Autowired 
+  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy rateDiscountPolicy) {
+    this.memberRepository = memberRepository;
+    this.discountPolicy = rateDiscountPolicy;
+  }
+````
+  - @Qualifier("name") -> @Qualifier 끼리 매칭 (-> 빈 이름 매칭) : 주입받을 때 모든 코드에 기재해주어야 함
+  - @Primary 사용 : @Autowired 시 여러 빈이 매칭되면 해당 @Primary가 우선권을 가짐
+    - 우선순위 : @Qualifier > @Primary

@@ -3,6 +3,7 @@ package printemps.core.discount;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.stereotype.Component;
 import printemps.core.member.Grade;
 import printemps.core.member.Member;
 
@@ -17,7 +18,7 @@ public class RateDiscountPolicyTest {
     Member member = new Member(1L, "memberVIP", Grade.VIP);
     
     //when
-    int discount = rateDiscountPolicy.discout(member, 10000);
+    int discount = rateDiscountPolicy.discount(member, 10000);
     
     //then
     Assertions.assertThat(discount).isEqualTo(1000);
@@ -30,7 +31,7 @@ public class RateDiscountPolicyTest {
     Member member = new Member(2L, "memberBASIC", Grade.BASIC);
     
     //when
-    int discount = rateDiscountPolicy.discout(member, 10000);
+    int discount = rateDiscountPolicy.discount(member, 10000);
     
     //then
     Assertions.assertThat(discount).isEqualTo(0);
