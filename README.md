@@ -82,7 +82,7 @@ InitMethodName
 DestroyMethodName
 Constructor arguments, Properties
 
-# 20210913_ [ADD] /test/SingletonService.java
+# 20210913_ Add /test/SingletonService.java
 ### Singleton
 - 생성자가 여러 차례 호출되더라도 실제로 생성되는 객체는 하나이고, 최초 생성 이후에 호출된 생성자는 최초의 생성자가 생성한 객체를 리턴
 
@@ -206,3 +206,15 @@ public class MemberServiceImpl implements MemberService {
             System.out.println("member3 : " + member);
         }
 ````
+
+### 생성자 주입
+- 불변, 누락 방지
+- final 키워드 사용 가능
+- 프레임 워크 의존 X 순수 자바 언어 특성의 특징을 잘 살림
+
+# 롬복
+File - Settings - Compiler - Annotation Processors - [Check] Enable annotiation processing 
+- @Getter 
+- @Setter
+- @ToString
+- @RequiredArgsConstructor : final이 붙은 변수를 파라미터로 받는 생성자 자동 완성. 의존관계 추가할 때 편함
