@@ -236,3 +236,35 @@ File - Settings - Compiler - Annotation Processors - [Check] Enable annotiation 
   - @Qualifier("name") -> @Qualifier 끼리 매칭 (-> 빈 이름 매칭) : 주입받을 때 모든 코드에 기재해주어야 함
   - @Primary 사용 : @Autowired 시 여러 빈이 매칭되면 해당 @Primary가 우선권을 가짐
     - 우선순위 : @Qualifier > @Primary
+
+### 어노테이션 직접 만들기
+~annotation.java
+````java
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Qualifier("mainDiscountPolicy")
+public @interface MainDiscountPolicy { }
+````
+RateDiscountPolicy.java
+````java
+@Component
+@MainDiscountPolicy
+public class RateDiscountPolicy implements DiscountPolicy{ }
+````
+OrderServiceImpl.java
+````java
+@Component
+//@RequiredArgsConstructor
+public class OrderServiceImpl implements OrderService{
+  
+  private final MemberRepository memberRepository;
+  private final DiscountPolicy discountPolicy;
+  
+  @Autowired
+  public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
+    this.memberRepository = memberRepository;
+    this.discountPolicy = discountPolicy;
+  }
+}
+````

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import printemps.core.annotation.MainDiscountPolicy;
 import printemps.core.discount.DiscountPolicy;
 import printemps.core.member.Member;
 import printemps.core.member.MemberRepository;
@@ -18,7 +19,7 @@ public class OrderServiceImpl implements OrderService{
   //private final DiscoutPolicy discoutPolicy = new RateDiscountPolicy();
 
   @Autowired // Type으로 조회
-  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+  public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
     //super();
     this.memberRepository = memberRepository;
     this.discountPolicy = discountPolicy;
