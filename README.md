@@ -156,3 +156,53 @@ public @interface MyExcludeComponent { }
     @ComponentScan(excludeFilters = @ComponentScan.Filter(classes = MyExcludeComponent.class))
     static class ComponentFilterAppConfig { }
 ````
+
+### 중복 등록과 충돌
+1. 자동 빈 등록 vs 자동 빈 등록
+2. 수동 빈 등록 vs 자동 빈 등록 : 스프링은 수동 빈이 자동 빈을 오버라이딩할 수 있는 것이 기본.
+   부트에서는 오버라이딩 불가능한 것이 기본. 부트에서 수동 빈이 자동 빈을 오버라이딩 하기 위해서는 기본값 설정 변경 필요.
+
+application.properties
+````
+spring.main.allow-bean-definition-overriding=true
+````
+
+### 의존 관계 주입 방법
+  - 생성자 주입 : 생성자 호출 시점에 1번만 호출 되는 것이 보장됨
+````java
+@Component
+public class MemberServiceImpl implements MemberService {
+  @Autowired
+  public MemberServiceImpl(MemberRepository memberRepository) {
+    this.memberRepository = memberRepository;
+  }
+ }
+ ````
+  - 수정자 주입(setter 주입)
+  - 필드 주입(권장 X) : 외부 변경 불가능하여 테스트하기 어려움. 테스트 코드에서는 사용 O.
+````java
+@Autowired private MemberRepository
+````
+  - 일반 메서드 주입 : Spring Container가 관리하는 Spring Bean이어야 동작함.
+
+### 옵션
+- @Autowired(required=false) : 자동 주입할 대상이 없으면 수정자 메서드 자체가 호출 안됨
+- org.springframework.lang.@Nullable : 자동 주입할 대상이 없으면 null이 입력된다.
+- Optional<> : 자동 주입할 대상이 없으면 Optional.empty 가 입력된다.
+
+````java
+        @Autowired(required = false)
+        public void setNoBean1(Member member) {
+            System.out.println("member1 : " + member);
+        }
+        
+        @Autowired
+        public void setNoBean2(@Nullable Member member) { // 생성자 주입 특정 필드에서만 사용해도 됨
+            System.out.println("member2 : " + member);
+        }
+
+        @Autowired
+        public void setNoBean3(Optional<Member> member) {
+            System.out.println("member3 : " + member);
+        }
+````
