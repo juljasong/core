@@ -268,3 +268,6 @@ public class OrderServiceImpl implements OrderService{
   }
 }
 ````
+
+### 조회한 빈이 모두 필요할 때, List, Map
+- test/printemps/core/autowired/AllBeanTest.java

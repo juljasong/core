@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService{
   //private final DiscoutPolicy discoutPolicy = new RateDiscountPolicy();
 
   @Autowired // Type으로 조회
-  public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
+  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
     //super();
     this.memberRepository = memberRepository;
     this.discountPolicy = discountPolicy;

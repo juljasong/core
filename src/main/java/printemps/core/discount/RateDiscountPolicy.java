@@ -9,8 +9,8 @@ import printemps.core.member.Member;
 
 @Component
 //@Qualifier("mainDiscountPolicy")
-//@Primary
-@MainDiscountPolicy
+@Primary
+//@MainDiscountPolicy
 public class RateDiscountPolicy implements DiscountPolicy{
   
   private int discountPercent = 10;
