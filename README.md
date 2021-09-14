@@ -271,3 +271,24 @@ public class OrderServiceImpl implements OrderService{
 
 ### 조회한 빈이 모두 필요할 때, List, Map
 - test/printemps/core/autowired/AllBeanTest.java
+
+### 자동, 수동의 올바른 실무 운영 기준
+- 자동 기능을 기본으로 사용
+- 수동 빈 등록이 필요한 경우
+  - 업무 로직(핵심 비지니스 로직 등)이 아닌 직접 등록하는 기술 지원(기술적인 문제나 공통 관심사(AOP) 처리) 로직에서 사용하는 것을 권장 (*스프링, 스프링 부트가 자동으로 등록하는 빈들은 예외)
+    - 업무 로직에 비해 그 수가 적고, 보통 애플리케이션 전반에 걸쳐 광범위하게 영향을 미치기 때문에 적용이 잘 되고 있는지 조차 파악하기 어려운 경우가 많음.
+  - 업무 로직 중 다형성을 적극 활용할 때
+    - DiscountPolicy와 같은 경우에는 수동 빈으로 등록하거나, 자동인 경우 특정 패키지에 같이 묶어두는 것이 좋다(한 눈에 볼 수 있음)
+```java
+@Configuration
+public class DiscountPolicyConfig {
+  @Bean
+  public DiscountPolicy rateDiscountPolicy() {
+    return new RateDiscountPolicy();
+  }
+  @Bean
+  public DiscountPolicy fixDiscountPolicy() {
+    return new FixDiscountPolicy();
+  }
+}
+```
