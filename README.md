@@ -357,3 +357,75 @@ Config
 - 최신 스프링에서 가장 권장하는 방법
 - 컴포넌트 스캔과 잘 어울림
   - 외부 라이브러리에는 적용하지 못함. 외부 라이브러리를 초기화, 종료해야하는 경우에는 2번 사용
+
+# Bean Scope
+- 싱글톤 : 스프링 기본 스코프. 스프링 컨테이너의 시작과 종료까지 유지되는 가장 넓은 범위의 스코프
+- 프로토타입 : 스프링 컨테이너는 프로토타입 빈의 생성과 의존관계 주입까지만 관여하고 더는 관리하지 않는 매우 짧은 범위의 스코프
+- 웹 관련 스코프
+  - request : 웹 요청이 들어오고 나갈 때 까지 유지되는 스코프
+  - session : 웹 세션이 생성되고 종료될 때 까지 유지되는 스코프
+  - application : 웹의 서블릿 컨텍스트와 같은 범위로 유지되는 스코프
+
+### 프로토타입 스코프
+- 항상 새로운 인스턴스를 생성하여 반환
+- 스프링 컨테이너는 프로토타입 빈의 생성과 의존관계 주입 및 초기화 까지만 관여
+- 종료 메서드 호출 X
+- => 프로토타입 빈을 조회한 클라이언트가 관리해야 함. 종료 메서드 호출도 클라이언트가 직접 해야 함.
+
+### 싱글톤 빈과 함께 사용시 문제점
+- 싱글톤 빈이 프로토타입 빈을 사용하게 되는 경우, 싱글톤 빈은 생성 시점에만 의존 관계 주입을 받기 때문에 새로 생성된 프로토타입 빈이 싱글톤 빈과 함께 계속 유지된다.
+
+#### → Provider로 문제 해결
+- 싱글톤 빈과 프로토타입 빈 함께 사용 시, 항상 새로운 프로토타입 빈 생성하는 방법
+  1. 싱글톤 빈이 프로토타입을 생성할 때 마다 스프링 컨테이너에 새로 요청
+  2. ObjectProvider/Factory 사용 -> DL(Dependency Lookup). 스프링 컨테이너를 통해 해당 빈 찾아 반환
+````java
+public class SingletonWithPrototypeTest {
+    
+    @Test
+    void singletonClientUsePrototype() {
+
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ClientBean.class, PrototypeBean.class);
+        ClientBean clientBean1 = ac.getBean(ClientBean.class);
+        int count1 = clientBean1.logic();
+        Assertions.assertThat(count1).isEqualTo(1);
+
+        ClientBean clientBean2 = ac.getBean(ClientBean.class);
+        int count2 = clientBean2.logic();
+        Assertions.assertThat(count2).isEqualTo(1);
+
+    }
+
+    // default: singleton
+    static class ClientBean {
+
+        @Autowired private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+        
+        public int logic() {
+            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            prototypeBean.addCount();
+            return prototypeBean.getCount();
+        }
+    }
+}
+````
+  3. JSR-330 Provider
+    - gradle implementation 'javax.inject:javax.inject:1' gradle 추가 필수 (외부 라이브러리 필요)
+    - 자바 표준이므롤 스프링이 아닌 다른 컨테이너에서도 사용할 수 있음.
+````java
+package javax.inject;
+public interface Provider<T> {
+    T get();
+}
+
+//implementation 'javax.inject:javax.inject:1' gradle 추가 필수
+  
+@Autowired private Provider<PrototypeBean> provider;
+public int logic() {
+    PrototypeBean prototypeBean = provider.get();
+    prototypeBean.addCount();
+    int count = prototypeBean.getCount();
+    return count;
+}
+````
+
