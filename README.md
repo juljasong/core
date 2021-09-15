@@ -301,10 +301,59 @@ public class DiscountPolicyConfig {
   - 초기화 콜백 : 빈이 생성되고, 빈의 의존관계 주입이 완료된 후 호출
   - 소멸 전 콜백 : 빈이 소멸되기 직전 호출
 
-### 1. 인터페이스 InitializingBean, DisposableBean
+### ~~1. 인터페이스 InitializingBean, DisposableBean~~
+- 단점 : 스프링 전용 인터페이스(해당 코드가 스프링 전용 인터페이스에 의존)
+- 초기화, 소멸 메서드의 이름 변경 불가
+- 외부 라이브러리 적용 불가
+````java
+public class NetworkClient implements InitializingBean, DisposableBean {
 
+    private String url;
+
+    public NetworkClient() { System.out.println("생성자 호출, url = " + url); }
+
+    public void setUrl(String url) { this.url = url; }
+    
+    public void connect() { System.out.println("connect: " + url); }
+
+    public void call(String message) { System.out.println("Call: " + url + " message = " + message); }
+  
+    public void disconnect() { System.out.println("close: " + url); }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        connect();
+        call("초기화 연결 메시지");
+    }
+
+    @Override
+    public void destroy() throws Exception { disconnect(); }
+}
+````
 
 ### 2. 빈 등록 초기화, 소멸 메서드
+- 설정 정보에 @Bean(initMethod = "init", destroyMethod = "close") 와 같은 형태로 지정
+- 메서드 이름을 자율옵게 줄 수 있음
+- 스프링 빈이 스프링 코드에 의존 X
+- 코드가 아닌 설정 정보를 이용하여 외부 라이브러리에도 초기화, 종료 메서드를 적용할 수 있음 
 
+Config
+````java
+        //@Bean(initMethod = "init", destroyMethod = "close")
+        @Bean(initMethod = "init")
+        public NetworkClient networkClient() {
+            NetworkClient networkClient = new NetworkClient();
+            networkClient.setUrl("http://url.com"); // 객체 생성 후 set
+            return networkClient;
+        }
+````
+- 종료 메서드 추론(destroyMethod)
+  - 라이브러리의 종료 메서드의 이름은 대부분 close, shutdown 
+  - @Bean의 destroyMethod의 기본값은 (inferred)
+  - close, shutdown이라는 이름의 메서드를 자동으로 호출해줌
 
 ### 3. 어노테이션 @PostConstruct, @PreDestroy
+- javax.annotation -> 스프링이 아니더라도 java에서 지원해줌
+- 최신 스프링에서 가장 권장하는 방법
+- 컴포넌트 스캔과 잘 어울림
+  - 외부 라이브러리에는 적용하지 못함. 외부 라이브러리를 초기화, 종료해야하는 경우에는 2번 사용
