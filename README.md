@@ -429,3 +429,19 @@ public int logic() {
 }
 ````
 
+# 웹 스코프
+- 웹 환경에서만 동작
+- 스프링이 해당 스코프의 종료시점까지 관리. 종료 메서드가 호출됨
+  - request : HTTP 요청 하나가 들어오고 나갈 때 까지 유지되는 스코프. 각각의 HTTP 요청 마다 별도의 빈 인스턴스가 생성되고 관리됨
+  - session : HTTP Session과 동일한 생명 주기를 가지는 스코프
+  - application : 서블릿 컨텍스트와 동일한 생명 주기를 가지는 스코프
+  - websocket : 웹 소켓과 동일한 생명 주기를 가지는 스코프
+
+````
+//web 라이브러리 추가 : 내장 톰캣 서버 활용하여 웹 서버와 스프링 함께 실행시킴
+implementation 'org.springframework.boot:spring-boot-starter-web'
+````
+
+### request 스코프
+- 동시에 여러 HTTP 요청이 오면 정확히 어떤 요청이 남긴 로그인지 구분하기 어려움 -> 이런 경우 사용할 수 있음
+- [UUID][requestURL]{message} -> UUID를 이용하여 HTTP 요청 구분
